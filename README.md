@@ -1,5 +1,5 @@
 #  Reactive programming and Hystrix fault tolerance
-This is supplementary showcase materials to presentation available at https://speakerdeck.com/desliner/reactive-programming-and-hystrix-fault-tolerance
+These are supplementary showcase materials to presentation available at https://speakerdeck.com/desliner/reactive-programming-and-hystrix-fault-tolerance
 
 References:
 * http://reactivex.io/intro.html
