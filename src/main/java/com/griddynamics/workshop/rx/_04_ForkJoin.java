@@ -24,7 +24,10 @@ public class _04_ForkJoin {
             Utils.sleep(2000);
             return s.substring(s.length() - 1, s.length()); // take last character
         });
-        Observable<String> zipped = Observable.zip(left, right, (a, b) -> a + b);
+        Observable<String> zipped = right.zipWith(left, (a, b) -> {
+            System.out.println("Zip executing on: " + Thread.currentThread().getName());
+            return a + b;
+        });
 
         //zipped = zipped.subscribeOn(Schedulers.newThread());
 

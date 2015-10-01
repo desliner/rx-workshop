@@ -4,8 +4,6 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
 
-import java.util.List;
-
 /**
  * @author Max Myslyvtsev
  * @since 9/17/15
@@ -44,6 +42,5 @@ public class _01_Create {
                 System.out.println("onNext: " + s);
             }
         });
-        Utils.sleep(1000);
     }
 }
