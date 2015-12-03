@@ -1,9 +1,14 @@
 package com.griddynamics.workshop.rx;
 
+import com.google.common.collect.Lists;
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Action1;
 
+import java.util.Arrays;
 import java.util.List;
+
+import static com.griddynamics.workshop.rx.Utils.*;
 
 /**
  * @author Max Myslyvtsev
@@ -52,10 +57,5 @@ public class _02_Modify {
         print("multiplied", multiplied);
         print("terminated", terminated);
         print("flatMapped", flatMapped);
-    }
-
-    private static void print(String name, Observable<?> o) {
-        List<?> list = o.toList().toBlocking().single();
-        System.out.println(String.format("%-12s %s ", name, list));
     }
 }

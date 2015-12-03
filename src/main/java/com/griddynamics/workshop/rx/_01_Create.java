@@ -3,6 +3,7 @@ package com.griddynamics.workshop.rx;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
+import rx.schedulers.Schedulers;
 
 /**
  * @author Max Myslyvtsev
@@ -11,17 +12,7 @@ import rx.Subscriber;
 public class _01_Create {
 
     public static void main(String[] args) {
-        Observable<String> o = Observable.create(new Observable.OnSubscribe<String>() {
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-                System.out.println("onSubscribe");
-                subscriber.onStart();
-                subscriber.onNext("a");
-                subscriber.onNext("b");
-                subscriber.onNext("c");
-                subscriber.onCompleted();
-            }
-        });
+        Observable<String> o = createObservable();
 
         System.out.println("First: " + o.toBlocking().first());
         System.out.println("All: " + o.toList().toBlocking().single());
@@ -42,5 +33,21 @@ public class _01_Create {
                 System.out.println("onNext: " + s);
             }
         });
+    }
+
+
+
+    private static Observable<String> createObservable() {
+        return Observable.create(new Observable.OnSubscribe<String>() {
+                @Override
+                public void call(Subscriber<? super String> subscriber) {
+                    System.out.println("onSubscribe");
+                    subscriber.onStart();
+                    subscriber.onNext("a");
+                    subscriber.onNext("b");
+                    subscriber.onNext("c");
+                    subscriber.onCompleted();
+                }
+            });
     }
 }
