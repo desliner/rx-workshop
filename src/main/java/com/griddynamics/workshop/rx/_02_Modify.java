@@ -1,12 +1,9 @@
 package com.griddynamics.workshop.rx;
 
-import com.google.common.collect.Lists;
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Action1;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedList;
 
 import static com.griddynamics.workshop.rx.Utils.*;
 
@@ -48,7 +45,7 @@ public class _02_Modify {
             }
         });
 
-        Observable<Integer> flatMapped = terminated.flatMap(x -> Observable.range(x, 3));
+        Observable<Integer> flatMapped = terminated.flatMap(_02_Modify::toDigits);
 
         print("numbers", numbers);
         print("even", even);
@@ -57,5 +54,15 @@ public class _02_Modify {
         print("multiplied", multiplied);
         print("terminated", terminated);
         print("flatMapped", flatMapped);
+    }
+
+
+    private static Observable<Integer> toDigits(int x) {
+        LinkedList<Integer> stack = new LinkedList<>();
+        while (x > 0) {
+            stack.push(x % 10);
+            x = x / 10;
+        }
+        return Observable.from(stack);
     }
 }
