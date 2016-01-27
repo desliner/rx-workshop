@@ -19,12 +19,15 @@ public class Utils {
     }
 
     public static <T> void print(String name, Observable<T> o) {
-        List<T> list = o.onErrorReturn(e->(T)new Object(){
-            @Override
-            public String toString() {
-                return "Error: " + e.getMessage();
-            }
-        }).toList().toBlocking().single();
-        System.out.println(String.format("%-12s %s ", name, list));
+        if (o != null) {
+            @SuppressWarnings("unchecked")
+            List<T> list = o.onErrorReturn(e->(T)new Object(){
+                @Override
+                public String toString() {
+                    return "Error: " + e.getMessage();
+                }
+            }).toList().toBlocking().single();
+            System.out.println(String.format("%-12s %s ", name, list));
+        }
     }
 }

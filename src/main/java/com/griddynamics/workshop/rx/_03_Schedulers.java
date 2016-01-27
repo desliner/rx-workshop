@@ -29,8 +29,8 @@ public class _03_Schedulers {
             }
         });
 
-        //o = o.subscribeOn(Schedulers.io());
-        //o = o.observeOn(Schedulers.newThread());
+        o = o.subscribeOn(Schedulers.io());
+        o = o.subscribeOn(Schedulers.newThread());
 
         for (int i = 1; i <= 3; i++) {
             final int id = i;

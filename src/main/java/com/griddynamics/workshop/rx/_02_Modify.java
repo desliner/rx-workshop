@@ -19,9 +19,9 @@ public class _02_Modify {
         Observable<Integer> even = numbers.filter(x -> x % 2 == 0);
         Observable<Integer> odd = numbers.filter(x -> x % 2 != 0);
 
-        Observable<Integer> paired = Observable.zip(even, odd, (x, y) -> x + y);
+        Observable<Integer> sum = Observable.zip(even, odd, (x, y) -> x + y);
 
-        Observable<Integer> multiplied = paired.map(x -> x * 10);
+        Observable<Integer> multiplied = sum.map(x -> x * 10);
 
         Observable<Integer> terminated = multiplied.lift(subscriber -> new Subscriber<Integer>() {
             @Override
@@ -45,15 +45,15 @@ public class _02_Modify {
             }
         });
 
-        Observable<Integer> flatMapped = terminated.flatMap(_02_Modify::toDigits);
+        Observable<Integer> digits = terminated.flatMap(_02_Modify::toDigits);
 
         print("numbers", numbers);
         print("even", even);
         print("odd", odd);
-        print("paired", paired);
+        print("sum", sum);
         print("multiplied", multiplied);
         print("terminated", terminated);
-        print("flatMapped", flatMapped);
+        print("digits", digits);
     }
 
 
