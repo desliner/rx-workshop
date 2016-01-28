@@ -17,10 +17,11 @@ public class _01_Create {
     public static void main(String[] args) {
         Observable<String> o = createObservable();
 
-        // TODO: print first item of o
-        // TODO: print all items of o
+        // TODO: 1) print first item of o
 
-        // TODO: subscribe and print individual events
+        // TODO: 2) print all items of o
+
+        // TODO: 3) subscribe and print individual events
     }
 
 

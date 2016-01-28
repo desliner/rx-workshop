@@ -12,13 +12,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Max Myslyvtsev
  * @since 9/23/15
  */
-public class _03_Schedulers {
+public class _05_Schedulers {
 
     public static void main(String[] args) throws Exception {
 
         // TODO: create an observable that:
         //  - prints incremental index of subscription when subscribed using log() method
-        //  - emits "a", then does 1000 pause, then emits "b", "c"
+        //  - emits "a", then does 1000ms pause, then emits "b", "c"
         Observable<String> o = null;
 
         // TODO: subscribe to observable 3 times and output all events with subscription index using log() method

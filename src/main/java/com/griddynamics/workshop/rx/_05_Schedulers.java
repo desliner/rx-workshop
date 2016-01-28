@@ -12,9 +12,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Max Myslyvtsev
  * @since 9/23/15
  */
-public class _03_Schedulers {
+public class _05_Schedulers {
 
     public static void main(String[] args) throws Exception {
+        // TODO: create an observable that:
+        //  - prints incremental index of subscription when subscribed using log() method
+        //  - emits "a", then does 1000ms pause, then emits "b", "c"
         AtomicInteger subscriptionId = new AtomicInteger(0);
         Observable<String> o = Observable.create(new Observable.OnSubscribe<String>() {
             @Override
@@ -29,9 +32,11 @@ public class _03_Schedulers {
             }
         });
 
+        // TODO: apply different schedulers in subscribeOn and observeOn
         o = o.subscribeOn(Schedulers.io());
-        o = o.subscribeOn(Schedulers.newThread());
+        o = o.observeOn(Schedulers.newThread());
 
+        // TODO: subscribe to observable 3 times and output all events with subscription index using log() method
         for (int i = 1; i <= 3; i++) {
             final int id = i;
             o.subscribe(new Observer<String>() {

@@ -9,7 +9,7 @@ import static com.griddynamics.workshop.rx.Utils.print;
  * @author Max Myslyvtsev
  * @since 11/23/15
  */
-public class _05_ErrorHandling {
+public class _04_ErrorHandling {
 
     public static void main(String[] args) {
 
@@ -25,6 +25,7 @@ public class _05_ErrorHandling {
 
         print("unhandled", unhandled);
         print("defaulted", defaulted);
+        print("backup", backup);
         print("resumed", resumed);
         print("mapped", mapped);
     }

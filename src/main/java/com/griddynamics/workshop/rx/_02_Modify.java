@@ -14,46 +14,37 @@ import static com.griddynamics.workshop.rx.Utils.*;
 public class _02_Modify {
 
     public static void main(String[] args) throws Exception {
-        Observable<Integer> numbers = Observable.range(1, 10);
 
-        Observable<Integer> even = numbers.filter(x -> x % 2 == 0);
-        Observable<Integer> odd = numbers.filter(x -> x % 2 != 0);
+        Observable<Integer> numbers = Observable.range(1, 10); // TODO: emit numbers 1 to 10
 
-        Observable<Integer> sum = Observable.zip(even, odd, (x, y) -> x + y);
+        Observable<Integer> even = numbers.filter(x -> x % 2 == 0); // TODO: filter even numbers
 
-        Observable<Integer> multiplied = sum.map(x -> x * 10);
+        Observable<Integer> odd = numbers.filter(x -> x % 2 == 1); // TODO: filter odd numbers
 
-        Observable<Integer> terminated = multiplied.lift(subscriber -> new Subscriber<Integer>() {
-            @Override
-            public void onCompleted() {
-                subscriber.onCompleted();
-            }
+        Observable<Integer> paired = Observable.zip(even, odd, (a,b) -> a+b); // TODO: pair even and odd numbers adding them together (1st even + 1st odd, 2nd even + 2nd odd, etc)
 
-            @Override
-            public void onError(Throwable e) {
-                subscriber.onError(e);
-            }
+        Observable<Integer> skipped = paired.skip(2); // TODO: skip first 2 items from paired
 
-            @Override
-            public void onNext(Integer integer) {
-                if (integer > 100) {
-                    subscriber.onCompleted();
-                    unsubscribe();
-                } else {
-                    subscriber.onNext(integer);
-                }
-            }
-        });
+        Observable<Integer> appended = skipped.concatWith(Observable.just(42)); // TODO: append 42 to the end of skipped
 
-        Observable<Integer> digits = terminated.flatMap(_02_Modify::toDigits);
+        Observable<Integer> multiplied = appended.map(x -> x * 10); // TODO: multiply each number from appended by 10
+
+        Observable<Integer> digits = multiplied.flatMap(_02_Modify::toDigits); // TODO: transform multiplied observable of numbers to observable of their digits
+
+        Observable<Integer> max = digits.reduce(Math::max); // TODO: find maximum digit
+
+        Observable<Integer> sum = digits.reduce((x, acc) -> x + acc); // TODO: sum all digits
 
         print("numbers", numbers);
         print("even", even);
         print("odd", odd);
-        print("sum", sum);
+        print("paired", paired);
+        print("skipped", skipped);
+        print("appended", appended);
         print("multiplied", multiplied);
-        print("terminated", terminated);
         print("digits", digits);
+        print("max", max);
+        print("sum", sum);
     }
 
 
